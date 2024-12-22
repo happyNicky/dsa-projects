@@ -4,19 +4,19 @@
 #include <cmath>
 using namespace std;
 
-int postFixEvaluator(string expression);
-int eval(int x, int y, char op);
+double postFixEvaluator(string expression);
+double eval(double x, double y, char op);
 
 int main() {
-    string k = "10 2 * 50 +";
+    string k = "5 10 /";
     cout << postFixEvaluator(k) << endl;
     return 0;
 }
 
-int postFixEvaluator(string expression) {
-    stack<int> k;
-    int x = 0;
-    int y = 0;
+double postFixEvaluator(string expression) {
+    stack<double> k;
+    double x = 0;
+    double y = 0;
     stringstream ss(expression);
     string token;
 
@@ -24,7 +24,7 @@ int postFixEvaluator(string expression) {
         if (token == "*" || token == "+" || token == "-" || token == "/" || token == "^") {
             x = k.top(); k.pop();
             y = k.top(); k.pop();
-            k.push(eval(y, x, token[0])); 
+            k.push(eval(x, y, token[0])); 
         } else {
             k.push(stoi(token)); 
         }
@@ -32,18 +32,18 @@ int postFixEvaluator(string expression) {
     return k.top();
 }
 
-int eval(int x, int y, char op) {
+double eval(double x, double y, char op) {
     switch (op) {
         case '*':
             return x * y;
         case '+':
             return x + y;
         case '-':
-            return x - y;
+            return y - x;
         case '/':
-            return x / y;
+            return y/ x;
         case '^':
-            return pow(x, y);
+            return pow(y, x);
     }
     return 0;
 }
