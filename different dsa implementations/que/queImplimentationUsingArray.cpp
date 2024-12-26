@@ -31,6 +31,12 @@ struct arr {
         }
         return x;
     }
+    bool isEmpty()
+    {
+        if(front==-1&& rear==-1)
+          return true;
+          return false;
+    }
 
     int fron() {
         if (front >= 0 && front <= rear) {
