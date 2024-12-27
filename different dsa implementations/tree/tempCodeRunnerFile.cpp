@@ -1,0 +1,1 @@
+k.root= k.insertNode(k.root,10);
