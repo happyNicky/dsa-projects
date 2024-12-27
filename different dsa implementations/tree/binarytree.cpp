@@ -1,4 +1,5 @@
 #include<iostream>
+#include<math.h>
 using namespace std;
 
 struct node
@@ -32,17 +33,51 @@ struct node
         else
          return search(root->left,x);
     }
-    int min(node* root)
-    {    int prev=root->data;
-         if(root==nullptr)
+    int findMin(node* root)
+    {    if(root==nullptr)
         {  cout<<"the tree is empty"<<endl;
            return -1;
         }
-        else if(root->right==nullptr&& root->left==nullptr)
-            return prev;
-        else 
-           return min(root->left);
+        else if(root->right==nullptr)
+            return root->data;
+           return findMin(root->left);
+    }
+    int findMax(node* root)
+    {   if(root==nullptr)
+        {   cout<<"the tree is empty"<<endl;
+             return -1;
+        }
+        else if(root->right== nullptr)
+           return root->data;
+        return findMax(root->right);
+    }
+    int heightOfATree(node* root)
+    {   if(root==nullptr)
+             return -1;
+       return max(heightOfATree(root->right),heightOfATree(root->left))+1;
+    }
+    void preOrderTraversal(node* root)
+    {   if(root==nullptr)
+            return;
+          cout<<root->data<<" ";
+        preOrderTraversal(root->left);
+        preOrderTraversal(root->right);
 
+    }
+    void inOrderTraversal(node* root)
+    {   if(root==nullptr)
+             return;
+       inOrderTraversal(root->left);
+       cout<<root->data<<" ";
+       inOrderTraversal(root->right);
+
+    }
+    void postOrderTraversal(node* root)
+    {   if(root==nullptr)
+            return;
+        postOrderTraversal(root->right);
+        cout<<root->data<<" ";
+        postOrderTraversal(root->left);
     }
 };
 
@@ -54,6 +89,18 @@ int main()
   k.insertNode(k.root,20);
   k.insertNode(k.root,3);
   k.insertNode(k.root,0);
-  cout<<k.search(k.root,11);
-  cout<<"min: "<<k.min(k.root);
+  k.insertNode(k.root,6);
+  //cout<<k.search(k.root,11);
+ // cout<<"min: "<<k.findMin(k.root);
+
+ cout<<"the height of the tree is: "<<k.heightOfATree(k.root)<<endl;
+ cout<<"pre order traversal of the tree is: ";
+ k.preOrderTraversal(k.root);
+ cout<<endl;
+cout<<"in order traversal of the tree is: ";
+ k.inOrderTraversal(k.root);
+ cout<<endl;
+ cout<<"post order traversal of the tree  is: ";
+ k.postOrderTraversal(k.root);
+ cout<<endl;
 }
